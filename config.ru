@@ -1,2 +1,2 @@
-require_relative 'chat'
+require_relative 'app'
 run Sinatra::Application
