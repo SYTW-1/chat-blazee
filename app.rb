@@ -7,12 +7,20 @@ enable :sessions
 set :session_secret, '*&(^#234a)'
 
 chat = ['welcome..']
+user = Array.new()
 
 get('/') { erb :login }
 
 post '/' do
-  session[:name] = params[:username]
-  erb :index
+  if(user.include?(params[:username]))
+    redirect '/'
+  else
+    name = params[:username]
+    session[:name] = name
+    user << name
+    puts user
+    erb :index
+  end
 end
 
 get '/send' do
