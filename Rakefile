@@ -1,9 +1,10 @@
 task :default => :server
+desc "Run server"
 
+task :server
+      sh "rackup"
 desc "run the chat server"
-task :server do
-  sh "bundle exec ruby chat.rb"
-end
+
 
 desc "make a non Ajax request via curl"
 task :noajax do
