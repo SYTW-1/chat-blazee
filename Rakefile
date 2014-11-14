@@ -1,9 +1,9 @@
 task :default => :server
-desc "Run server"
 
+desc "run the chat server"
 task :server
       sh "rackup"
-desc "run the chat server"
+
 
 
 desc "make a non Ajax request via curl"
