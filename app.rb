@@ -38,6 +38,7 @@ get '/update' do
       <% @updates.each do |phrase| %>
         <%= phrase %> <br />
       <% end %>
+
       <span data-last="<%= @last %>"></span>
   HTML
 end

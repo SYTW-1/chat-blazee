@@ -1,3 +1,6 @@
 desc "Run server"
-    task :server => :default
+    task :server  do
       sh "rackup"
+end
+
+task :default => :server
