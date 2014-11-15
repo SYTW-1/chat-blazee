@@ -13,7 +13,7 @@ get '/' do
   if !session[:name]
     erb :login
   else
-    erb :index
+    erb :chat
   end
 end
 
@@ -29,7 +29,7 @@ post '/' do
     session[:name] = name
     user << name
     puts user
-    erb :index
+    erb :chat
   end
 end
 get '/logout' do
