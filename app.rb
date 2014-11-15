@@ -22,6 +22,11 @@ post '/' do
     erb :index
   end
 end
+get '/logout' do
+  user.delete(session[:name])
+  session.clear
+  redirect '/'
+end
 
 get '/send' do
   return [404, {}, "Not an ajax request"] unless request.xhr?
