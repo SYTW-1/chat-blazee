@@ -22,6 +22,10 @@ get '/chat' do
   haml :chat
 end
 
+get '/reset' do
+  chat = ['welcome..']
+end
+
 post '/' do
   if(user.include?(params[:username]))
     redirect '/'
