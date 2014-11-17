@@ -73,7 +73,7 @@
 
 #chat.box{
     overflow-y: scroll;
-    height: 300px;
+    height: 600px;
 }
 
 .user{
@@ -101,4 +101,8 @@ ul.chat img, #user img{
 .align-right{
     text-align: right;
     margin-right: 15px;
+}
+
+.panel-body{
+    padding: 5% !important;
 }
