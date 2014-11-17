@@ -1,5 +1,6 @@
 require 'sinatra' 
 require 'sinatra/reloader' if development?
+require 'haml'
 #set :port, 3000
 #set :environment, :production
 
@@ -11,14 +12,14 @@ user = Array.new()
 
 get '/' do
   if !session[:name]
-    erb :login
+    haml :login
   else
-    erb :chat
+    haml :chat
   end
 end
 
 get '/chat' do
-  erb :chat
+  haml :chat
 end
 
 post '/' do
@@ -29,7 +30,7 @@ post '/' do
     session[:name] = name
     user << name
     puts user
-    erb :chat
+    haml :chat
   end
 end
 get '/logout' do
@@ -75,25 +76,5 @@ get '/chat/update' do
   @updates = chat[params['last'].to_i..-1] || []
 
   @last = chat.size
-  erb <<-'HTML', :layout => false
-      <% @updates.each do |phrase| %>
-          <ul class="chat">
-            <li class="left clearfix"><span class="chat-img pull-left">
-                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
-            </span>
-                <div class="chat-body clearfix">
-                    <div class="header">
-                        <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                            <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
-                    </div>
-                    <p>
-                        <%= phrase %> <br />
-                    </p>
-                </div>
-            </li>
-        </ul>
-      <% end %>
-
-      <span id="last" data-last="<%= @last %>"></span>
-  HTML
+  haml :chat_response, :layout => false
 end
