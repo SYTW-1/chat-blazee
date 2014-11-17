@@ -7,8 +7,9 @@ require 'haml'
 enable :sessions
 set :session_secret, '*&(^#234a)'
 
-chat = ['welcome..']
+chat = []
 user = Array.new()
+index = nil
 
 get '/' do
   if !session[:name]
@@ -32,20 +33,22 @@ post '/' do
   else
     name = params[:username]
     session[:name] = name
-    user << name
-    puts user
+    color = rand(0xffffff).to_s(16)
+    session[:color] = color
+    user << [name,color]
     haml :chat
   end
 end
 get '/logout' do
-  user.delete(session[:name])
+  user.delete([session[:name],session[:color]])
   session.clear
   redirect '/'
 end
 
 get '/send' do
   return [404, {}, "Not an ajax request"] unless request.xhr?
-  chat << "#{session[:name]} : #{params['text']}"
+  chat << "#{session[:name].upcase} : #{params['text']}"
+  index = user.index([session[:name],session[:color]])
   nil
 end
 
@@ -54,25 +57,13 @@ get '/update' do
   @updates = chat[params['last'].to_i..-1] || []
 
   @last = chat.size
-  erb <<-'HTML', :layout => false
-      <% @updates.each do |phrase| %>
-        <%= phrase %> <br />
-      <% end %>
-
-      <span data-last="<%= @last %>"></span>
-  HTML
+  haml :update, :layout => false
 end
 
 get '/user' do
   return [404, {}, "Not an ajax request"] unless request.xhr?
   @user = user
-  erb <<-'HTML', :layout => false
-    <div id="user">
-      <% @user.each do |phrase| %>
-        <%= phrase %> <br />
-      <% end %>
-    </div>
-  HTML
+  haml :user, :layout => false
 end
 
 get '/chat/update' do
@@ -80,5 +71,7 @@ get '/chat/update' do
   @updates = chat[params['last'].to_i..-1] || []
 
   @last = chat.size
+  @user = user
+  @index = index
   haml :chat_response, :layout => false
 end

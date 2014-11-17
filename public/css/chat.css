@@ -75,3 +75,25 @@
     overflow-y: scroll;
     height: 300px;
 }
+
+.user{
+    display: table;
+    width: 100%;
+}
+
+.user > span.img{
+    margin: 0 2%;
+    width: 10%;
+}
+
+.user > span.text{
+    padding: 0 10px;
+    text-align: right;
+    width: 90%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+ul.chat img, #user img{
+    border-radius: 48px;
+}

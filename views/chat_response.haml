@@ -1,5 +1,14 @@
-- @updates.each do |phrase|
+- @updates.each_with_index do |phrase, index|
   %ul.chat
-    %li
-      #{phrase}
+    -if session[:name] == @user[@index][0]
+      %li.user
+        %span.text
+          #{phrase}
+        %span.img
+          %img{:src=>"https://placehold.it/48x48/#{@user[@index][1]}/000000/&text=#{@user[@index][0][0..2].upcase}"}
+    - else
+      %li
+        %img{:src=>"https://placehold.it/48x48/#{@user[@index][1]}/000000/&text=#{@user[@index][0][0..2].upcase}"}
+        %span
+          #{phrase}
 %span#last{"data-last"=>"#{@last}"}
