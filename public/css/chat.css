@@ -97,3 +97,8 @@
 ul.chat img, #user img{
     border-radius: 48px;
 }
+
+.align-right{
+    text-align: right;
+    margin-right: 15px;
+}

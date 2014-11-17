@@ -8,8 +8,7 @@ enable :sessions
 set :session_secret, '*&(^#234a)'
 
 chat = []
-user = Array.new()
-index = nil
+user = Hash.new()
 
 get '/' do
   if !session[:name]
@@ -32,30 +31,28 @@ post '/' do
     redirect '/'
   else
     name = params[:username]
-    session[:name] = name
     color = rand(0xffffff).to_s(16)
+    session[:name] = name
     session[:color] = color
-    user << [name,color]
+    user[name] = [name,color]
     haml :chat
   end
 end
 get '/logout' do
-  user.delete([session[:name],session[:color]])
+  user.delete(session[:name])
   session.clear
   redirect '/'
 end
 
 get '/send' do
   return [404, {}, "Not an ajax request"] unless request.xhr?
-  chat << "#{session[:name].upcase} : #{params['text']}"
-  index = user.index([session[:name],session[:color]])
+  chat << [session[:name],session[:color],"#{params['text']}"]
   nil
 end
 
 get '/update' do
   return [404, {}, "Not an ajax request"] unless request.xhr?
   @updates = chat[params['last'].to_i..-1] || []
-
   @last = chat.size
   haml :update, :layout => false
 end
@@ -71,7 +68,5 @@ get '/chat/update' do
   @updates = chat[params['last'].to_i..-1] || []
 
   @last = chat.size
-  @user = user
-  @index = index
   haml :chat_response, :layout => false
 end
