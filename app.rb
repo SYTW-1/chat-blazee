@@ -39,6 +39,7 @@ post '/' do
   end
 end
 get '/logout' do
+  puts "logout #{user[session[:name]]}"
   user.delete(session[:name])
   session.clear
   redirect '/'
