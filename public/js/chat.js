@@ -18,7 +18,7 @@ $('#text').keypress(
           if(last != prev_last){
             prev_last = last;
             $('#chat').append(response);
-            $('#chat').scrollTop($("#chat").prop("scrollHeight"));
+            $('.panel-body>#chat').scrollTop($(".panel-body>#chat").prop("scrollHeight"));
           }
         }
       );

@@ -61,10 +61,14 @@
     border-radius: 5px;
 }
 
-.panel-body
-{
+.panel-body{
+    overflow: hidden !important;
+    height: 100% !important;
+}
+
+#chat.box{
     overflow-y: scroll;
-    height: 250px;
+    height: 300px;
 }
 
 .user{
