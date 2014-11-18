@@ -14,6 +14,7 @@ get '/' do
   if !session[:name]
     haml :login
   else
+    @name = session[:name]
     haml :chat
   end
 end
@@ -35,7 +36,9 @@ post '/' do
     session[:name] = name
     session[:color] = color
     user[name] = [name,color]
+    @name = name
     haml :chat
+
   end
 end
 get '/logout' do

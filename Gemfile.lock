@@ -19,7 +19,7 @@ GEM
       rack (>= 1.0)
     rake (10.3.2)
     rubyzip (1.1.6)
-    selenium-webdriver (2.44.0)
+    selenium-webdriver (2.43.0)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
@@ -52,7 +52,7 @@ DEPENDENCIES
   minitest
   rack-test
   rake
-  selenium-webdriver
+  selenium-webdriver (= 2.43.0)
   sinatra
   sinatra-contrib
   test-unit

@@ -3,8 +3,8 @@
     .col-xs-12.col-md-8
       .panel.panel-primary
         .panel-heading
-          %h3
-            Public Chat
+          %h3#welcome
+            Welcome: #{@name}
             %a.btn.btn-success.pull-right{:href=>"/logout"} Log Out
         .panel-body
           #chat.box

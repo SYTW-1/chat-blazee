@@ -10,5 +10,5 @@ group :test, :development do
    gem 'rake'
    gem 'minitest'
    gem 'test-unit'
-   gem 'selenium-webdriver'
+   gem 'selenium-webdriver','2.43.0'
 end
