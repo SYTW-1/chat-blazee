@@ -1,12 +1,6 @@
 .container
   .row
-    .col-xs-4.col-md-4
-      .panel.panel-primary
-        .panel-heading
-          %h3 Usuarios Conectados
-        .panel-body
-          #user
-    .col-xs-8.col-md-8
+    .col-xs-12.col-md-8
       .panel.panel-primary
         .panel-heading
           %h3
@@ -16,3 +10,9 @@
           #chat.box
         .panel-footer
           %input#text.large{:placeholder=>"Write and Enter"}
+    .col-xs-12.col-md-4
+      .panel.panel-primary
+        .panel-heading
+          %h3 Usuarios Conectados
+        .panel-body
+          #user
