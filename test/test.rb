@@ -38,4 +38,17 @@ describe "Test APP chat: Comprobacion de enlaces" do
 		assert_equal("Welcome: Prueba\nLog Out", @browser.find_element(:id,"welcome").text)
 	 end
    end
+   it "The user send a post" do
+	 begin
+	 	@browser.manage.timeouts.implicit_wait = 5
+		element = @browser.find_element(:id,"username")
+		element.send_keys("Prueba")
+		element.submit 
+	 ensure
+	 	element = @browser.find_element(:id,"text")
+	 	element.send_keys("Hola")
+		element.send_keys:return
+		assert_equal("Hola", @browser.find_element(:id,"name").text)
+	 end
+   end
 end
