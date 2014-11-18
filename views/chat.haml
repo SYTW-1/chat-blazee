@@ -5,7 +5,7 @@
         .panel-heading
           %h3#welcome
             Welcome: #{@name}
-            %a.btn.btn-success.pull-right{:href=>"/logout"} Log Out
+            %a.btn.btn-success.pull-right{:href=>"/logout", :id=>"logout"} Log Out
         .panel-body
           #chat.box
         .panel-footer

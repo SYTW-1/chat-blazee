@@ -51,4 +51,16 @@ describe "Test APP chat: Comprobacion de enlaces" do
 		assert_equal("Hola", @browser.find_element(:id,"name").text)
 	 end
    end
+   it "User prueba logout" do
+	 begin
+	 	@browser.manage.timeouts.implicit_wait = 5
+		element = @browser.find_element(:id,"username")
+		element.send_keys("Prueba")
+		element.submit 
+	 ensure
+	 	element = @browser.find_element(:id,"logout")
+		element.click
+		assert_equal("Please sign in", @browser.find_element(:id,"title").text)
+	 end
+   end
 end
