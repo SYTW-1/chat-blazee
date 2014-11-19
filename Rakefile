@@ -11,6 +11,14 @@ task :rackup do
 end
 
 desc "Update app in Heroku"
+task :fullupdate do
+  sh "git push origin master"
+  sh "git push origin1 master"
+  sh "git push origin2 master"
+  sh "git push heroku master"
+end
+
+desc "Update app in Heroku"
 task :update do
   sh "git checkout master"
   sh "git commit -a -m 'update config heroku'"

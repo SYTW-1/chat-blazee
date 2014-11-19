@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+require 'coveralls'
+Coveralls.wear!
 ENV['RACK_ENV'] = 'test'
 require_relative '../app.rb'
 require 'test/unit'
@@ -6,17 +8,17 @@ require 'minitest/autorun'
 require 'rack/test'
 require 'selenium-webdriver'
 require 'rubygems'
-require 'coveralls'
 require 'rspec'
-Coveralls.wear!
+
 
 include Rack::Test::Methods
 
-def app
-   Sinatra::Application
-end
 
 describe "Test APP chat: Comprobacion de enlaces" do
+
+	def app
+	   Sinatra::Application
+	end
 
    before :each do
 	  @browser = Selenium::WebDriver.for :firefox
