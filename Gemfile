@@ -6,6 +6,7 @@ gem 'sinatra-contrib'
 gem 'haml'
 
 group :test, :development do
+   gem 'rspec'
    gem 'rack-test'
    gem 'rake'
    gem 'minitest'

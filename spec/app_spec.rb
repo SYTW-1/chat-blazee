@@ -7,6 +7,7 @@ require 'rack/test'
 require 'selenium-webdriver'
 require 'rubygems'
 require 'coveralls'
+require 'rspec'
 Coveralls.wear!
 
 include Rack::Test::Methods
@@ -23,6 +24,7 @@ describe "Test APP chat: Comprobacion de enlaces" do
 	  if (ARGV[0].to_s == "local")
 		 @site = 'localhost:9292/'
 	  end
+	  @site = 'localhost:9292/'
 	  @browser.get(@site)
    end
    
@@ -31,38 +33,30 @@ describe "Test APP chat: Comprobacion de enlaces" do
    end
 
    it "The user Prueba can access to chat" do
-	 begin
 	 	@browser.manage.timeouts.implicit_wait = 5
 		element = @browser.find_element(:id,"username")
 		element.send_keys("Prueba")
 		element.submit 
-	 ensure
-		assert_equal("Welcome: Prueba\nLog Out", @browser.find_element(:id,"welcome").text)
-	 end
+	 	expect(@browser.find_element(:id,"welcome").text).to eq("Welcome: Prueba\nLog Out")
    end
    it "The user send a post" do
-	 begin
+   		@browser.get(@site)
 	 	@browser.manage.timeouts.implicit_wait = 5
 		element = @browser.find_element(:id,"username")
 		element.send_keys("Prueba")
 		element.submit 
-	 ensure
 	 	element = @browser.find_element(:id,"text")
 	 	element.send_keys("Hola")
 		element.send_keys:return
-		assert_equal("Hola", @browser.find_element(:id,"name").text)
-	 end
+		expect(@browser.find_element(:id,"name").text).to eq("Hola")
    end
    it "User prueba logout" do
-	 begin
 	 	@browser.manage.timeouts.implicit_wait = 5
 		element = @browser.find_element(:id,"username")
 		element.send_keys("Prueba")
 		element.submit 
-	 ensure
 	 	element = @browser.find_element(:id,"logout")
 		element.click
-		assert_equal("Please sign in", @browser.find_element(:id,"title").text)
-	 end
+		expect(@browser.find_element(:id,"title").text).to eq("Please sign in")
    end
 end

@@ -42,3 +42,8 @@ desc "Open repository"
 task :repo do
   sh "gnome-open https://github.com/SYTW-1/chat"
 end
+
+desc "run specs"
+task :spec do
+  sh "bundle exec rspec spec"
+end
