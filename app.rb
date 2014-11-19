@@ -30,9 +30,9 @@ post '/' do
     user[name] = [name,color]
     @name = name
     haml :chat
-
   end
 end
+
 get '/logout' do
   puts "logout #{user[session[:name]]}"
   user.delete(session[:name])
