@@ -13,7 +13,7 @@ require 'rspec'
 
 include Rack::Test::Methods
 
-
+=begin
 describe "Test APP chat: Comprobacion de enlaces" do
 
 	def app
@@ -60,4 +60,47 @@ describe "Test APP chat: Comprobacion de enlaces" do
 		element.click
 		expect(@browser.find_element(:id,"title").text).to eq("Please sign in")
    end
+end
+=end
+describe "Test APP chat: Comprobacion de funciones" do
+
+	def app
+	   Sinatra::Application
+	end
+
+	it "No hay sesion iniciada" do
+		get '/'
+		expect(last_response).to be_ok
+	end
+
+	it "post" do
+		post '/'
+		expect(last_response).to be_ok
+	end
+
+	it "Cierre de sesion" do
+		get '/logout'
+		expect(last_response.body).to eq("")
+	end
+
+	it "Envio" do
+		get '/send'
+		expect(last_response.body).to eq("")
+	end
+
+	it "Update" do
+		get '/update'
+		expect(last_response.body).to eq("Not an ajax request")
+	end
+
+	it "User" do
+		get '/user'
+		expect(last_response.body).to eq("Not an ajax request")
+	end
+
+	it "chat update" do
+		get '/chat/update'
+		expect(last_response.body).to eq("Not an ajax request")
+	end
+
 end

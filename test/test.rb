@@ -17,7 +17,7 @@ end
 
 describe "Test APP chat: Comprobacion de enlaces" do
 
-   before :each do
+   before :all do
 	  @browser = Selenium::WebDriver.for :firefox
 	  @site = 'https://chat-blazee.herokuapp.com/'
 	  if (ARGV[0].to_s == "local")
@@ -26,7 +26,7 @@ describe "Test APP chat: Comprobacion de enlaces" do
 	  @browser.get(@site)
    end
    
-   after :each do
+   after :all do
 	  @browser.quit
    end
 
