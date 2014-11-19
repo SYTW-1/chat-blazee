@@ -19,6 +19,10 @@ get '/' do
   end
 end
 
+get '/chat' do
+  haml :chat
+end
+
 get '/reset' do
   chat = ['welcome..']
 end
@@ -45,8 +49,12 @@ get '/logout' do
 end
 
 get '/send' do
-  return [404, {}, "Not an ajax request"] unless request.xhr?
-  chat << [session[:name],session[:color],"#{params['text']}"]
+  if !session[:name]
+    error = "No hay session iniciada"
+  else
+    return [404, {}, "Not an ajax request"] unless request.xhr?
+    chat << [session[:name],session[:color],"#{params['text']}"]
+  end
   nil
 end
 
