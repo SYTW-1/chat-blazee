@@ -1,4 +1,4 @@
-task :default => :tests
+task :default => :spec
 
 desc "Run the server via Sinatra"
 task :sinatra do
