@@ -21,7 +21,8 @@ end
 
 post '/' do
   if(user.include?(params[:username]))
-    redirect '/'
+    @error = true
+    haml :login
   else
     name = params[:username]
     color = rand(0xffffff).to_s(16)
