@@ -10,8 +10,9 @@ set :session_secret, '*&(^#234a)'
 chat = []
 user = Hash.new()
 
-get '/' do
+get "/" do
   if !session[:name]
+    @error = [false,0]
     haml :login
   else
     @name = session[:name]
@@ -21,7 +22,7 @@ end
 
 post '/' do
   if(user.include?(params[:username]))
-    @error = true
+    @error = [true,0]
     haml :login
   else
     name = params[:username]
@@ -35,7 +36,6 @@ post '/' do
 end
 
 get '/logout' do
-  puts "logout #{user[session[:name]]}"
   user.delete(session[:name])
   session.clear
   redirect '/'
@@ -43,7 +43,7 @@ end
 
 get '/send' do
   if !session[:name]
-    error = "No hay session iniciada"
+    return false
   else
     return [404, {}, "Not an ajax request"] unless request.xhr?
     chat << [session[:name],session[:color],"#{params['text']}"]

@@ -1,10 +1,11 @@
 .container
-  -if @error
+  -if @error[0]
     .alert.alert-danger.alert-dismissible
       %button.close{:type=>"button","data-dimiss"=>"alert"}
         %span{"aria-hidden"=>"true"}
         %span.sr-only Close
-      %strong Invalid User: this username already exists.
+      - if @error[1] == 0
+        %strong Invalid User: this username already exists.
   %form.form-signin{:action => "/", :method => "POST", :role => "form"}
     %h2.form-signin-heading#title Please sign in
     %input#username.form-control{:autofocus => "", :name => "username", :placeholder => "User name", :required => "", :type => "text"}
